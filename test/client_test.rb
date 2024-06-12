@@ -1,6 +1,8 @@
-require "test_helper"
+# frozen_string_literal: true
 
-TEST_KEY = "suo_test_key".freeze
+require 'test_helper'
+
+TEST_KEY = 'suo_test_key'
 
 module ClientTests
   def client(options = {})
@@ -16,7 +18,7 @@ module ClientTests
 
   def test_single_resource_locking
     lock1 = @client.lock
-    refute_nil lock1
+    assert_not_nil lock1
 
     locked = @client.locked?
     assert_equal true, locked
@@ -38,13 +40,13 @@ module ClientTests
   end
 
   def test_empty_lock_on_invalid_data
-    @client.send(:initial_set, "bad value")
+    @client.send(:initial_set, 'bad value')
     assert_equal false, @client.locked?
   end
 
   def test_clear
     lock1 = @client.lock
-    refute_nil lock1
+    assert_not_nil lock1
 
     @client.clear
 
@@ -55,12 +57,12 @@ module ClientTests
     @client = client(resources: 2)
 
     lock1 = @client.lock
-    refute_nil lock1
+    assert_not_nil lock1
 
     assert_equal false, @client.locked?
 
     lock2 = @client.lock
-    refute_nil lock2
+    assert_not_nil lock2
 
     assert_equal true, @client.locked?
 
@@ -86,7 +88,7 @@ module ClientTests
 
   def test_block_unlocks_on_exception
     assert_raises(RuntimeError) do
-      @client.lock{ fail "Test" }
+      @client.lock { raise 'Test' }
     end
 
     assert_equal false, @client.locked?
@@ -97,22 +99,32 @@ module ClientTests
     @client = client(resources: 2)
     threads = []
 
-    threads << Thread.new { @client.lock { output << "One"; sleep 0.5 } }
-    threads << Thread.new { @client.lock { output << "Two"; sleep 0.5 } }
+    threads << Thread.new do
+      @client.lock do
+        output << 'One'
+        sleep 0.5
+      end
+    end
+    threads << Thread.new do
+      @client.lock do
+        output << 'Two'
+        sleep 0.5
+      end
+    end
     sleep 0.1
-    threads << Thread.new { @client.lock { output << "Three" } }
+    threads << Thread.new { @client.lock { output << 'Three' } }
 
     threads.each(&:join)
 
     ret = []
 
-    ret << (output.size > 0 ? output.pop : nil)
-    ret << (output.size > 0 ? output.pop : nil)
+    ret << (output.size.positive? ? output.pop : nil)
+    ret << (output.size.positive? ? output.pop : nil)
 
     ret.sort!
 
     assert_equal 0, output.size
-    assert_equal %w(One Two), ret
+    assert_equal %w[One Two], ret
     assert_equal false, @client.locked?
   end
 
@@ -166,7 +178,12 @@ module ClientTests
 
     @client = client(stale_lock_expiration: 0.5)
 
-    t1 = Thread.new { @client.lock { sleep 0.6; success_counter << 1 } }
+    t1 = Thread.new do
+      @client.lock do
+        sleep 0.6
+        success_counter << 1
+      end
+    end
     sleep 0.3
     t2 = Thread.new do
       locked = @client.lock { success_counter << 1 }
@@ -186,7 +203,12 @@ module ClientTests
 
     @client = client(stale_lock_expiration: 0.5)
 
-    t1 = Thread.new { @client.lock { sleep 0.6; success_counter << 1 } }
+    t1 = Thread.new do
+      @client.lock do
+        sleep 0.6
+        success_counter << 1
+      end
+    end
     sleep 0.55
     t2 = Thread.new do
       locked = @client.lock { success_counter << 1 }
@@ -326,7 +348,7 @@ module ClientTests
 
     threads = 2.times.map do
       Thread.new do
-        # note this is the method that generates a *new* client
+        # NOTE: this is the method that generates a *new* client
         client.lock { i += 1 }
       end
     end
@@ -349,7 +371,7 @@ class TestBaseClient < Minitest::Test
     end
 
     assert_raises(NotImplementedError) do
-      @client.send(:set, "", "")
+      @client.send(:set, '', '')
     end
 
     assert_raises(NotImplementedError) do
@@ -366,7 +388,7 @@ class TestMemcachedClient < Minitest::Test
   include ClientTests
 
   def setup
-    @dalli = Dalli::Client.new("127.0.0.1:11211")
+    @dalli = Dalli::Client.new('127.0.0.1:11211')
     @client = Suo::Client::Memcached.new(TEST_KEY)
     teardown
   end
@@ -392,6 +414,6 @@ end
 
 class TestLibrary < Minitest::Test
   def test_that_it_has_a_version_number
-    refute_nil ::Suo::VERSION
+    assert_not_nil ::Suo::VERSION
   end
 end

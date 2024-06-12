@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module Suo
   module Client
     class Memcached < Base
       def initialize(key, options = {})
-        options[:client] ||= Dalli::Client.new(options[:connection] || ENV["MEMCACHE_SERVERS"] || "127.0.0.1:11211")
+        options[:client] ||= Dalli::Client.new(options[:connection] || ENV['MEMCACHE_SERVERS'] || '127.0.0.1:11211')
         super
       end
 

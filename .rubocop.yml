@@ -1,219 +1,69 @@
 AllCops:
-  Exclude:
-    - .git/**/*
-    - tmp/**/*
-    - suo.gemspec
-
-Lint/DuplicateMethods:
-  Enabled: true
-
-Lint/DeprecatedClassMethods:
-  Enabled: true
-
-Style/TrailingWhitespace:
-  Enabled: true
-
-Style/Tab:
-  Enabled: true
-
-Style/TrailingBlankLines:
-  Enabled: true
-
-Style/NilComparison:
-  Enabled: true
-
-Style/NonNilCheck:
-  Enabled: true
-
-Style/Not:
-  Enabled: true
-
-Style/RedundantReturn:
-  Enabled: true
-
-Style/ClassCheck:
-  Enabled: true
-
-Style/EmptyLines:
-  Enabled: true
-
-Style/EmptyLiteral:
-  Enabled: true
-
-Style/Alias:
-  Enabled: true
-
-Style/MethodCallParentheses:
-  Enabled: true
-
-Style/MethodDefParentheses:
-  Enabled: true
-
-Style/SpaceBeforeBlockBraces:
-  Enabled: true
-
-Style/SpaceInsideBlockBraces:
-  Enabled: true
-
-Style/SpaceInsideParens:
-  Enabled: true
-
-Style/DeprecatedHashMethods:
-  Enabled: true
-
-Style/HashSyntax:
-  Enabled: true
-
-Style/SpaceInsideHashLiteralBraces:
-  Enabled: true
-  EnforcedStyle: no_space
-
-Style/SpaceInsideBrackets:
-  Enabled: true
-
-Style/AndOr:
+  NewCops: enable
+Documentation:
   Enabled: false
-
-Style/TrailingCommaInLiteral:
+Layout/ArgumentAlignment:
   Enabled: true
-
-Style/SpaceBeforeComma:
+  EnforcedStyle: with_fixed_indentation
+Layout/BeginEndAlignment:
   Enabled: true
-
-Style/SpaceBeforeComment:
+  EnforcedStyleAlignWith: start_of_line
+Layout/BlockAlignment:
   Enabled: true
-
-Style/SpaceBeforeSemicolon:
+  EnforcedStyleAlignWith: start_of_block
+Layout/BlockEndNewline:
   Enabled: true
-
-Style/SpaceAroundBlockParameters:
+Layout/CaseIndentation:
   Enabled: true
-
-Style/SpaceAroundOperators:
+Layout/FirstArgumentIndentation:
   Enabled: true
-
-Style/SpaceAfterColon:
+  EnforcedStyle: consistent_relative_to_receiver
+Layout/FirstArrayElementIndentation:
   Enabled: true
-
-Style/SpaceAfterComma:
+  EnforcedStyle: special_inside_parentheses
+Layout/FirstHashElementIndentation:
   Enabled: true
-
-Style/SpaceAroundKeyword:
+  EnforcedStyle: special_inside_parentheses
+Layout/HashAlignment:
   Enabled: true
-
-Style/SpaceAfterNot:
+  EnforcedColonStyle: table
+Layout/MultilineHashBraceLayout:
   Enabled: true
-
-Style/SpaceAfterSemicolon:
+  EnforcedStyle: symmetrical
+Layout/MultilineHashKeyLineBreaks:
   Enabled: true
-
-Lint/UselessComparison:
-  Enabled: true
-
-Lint/InvalidCharacterLiteral:
-  Enabled: true
-
-Lint/LiteralInInterpolation:
-  Enabled: true
-
-Lint/LiteralInCondition:
-  Enabled: true
-
-Lint/UnusedBlockArgument:
-  Enabled: true
-
-Style/VariableInterpolation:
-  Enabled: true
-
-Style/RedundantSelf:
-  Enabled: true
-
-Style/ParenthesesAroundCondition:
-  Enabled: true
-
-Style/WhileUntilDo:
-  Enabled: true
-
-Style/EmptyLineBetweenDefs:
-  Enabled: true
-
-Style/EmptyLinesAroundAccessModifier:
-  Enabled: true
-
-Style/EmptyLinesAroundMethodBody:
-  Enabled: true
-
-Style/ColonMethodCall:
-  Enabled: true
-
-Lint/SpaceBeforeFirstArg:
-  Enabled: true
-
-Lint/UnreachableCode:
-  Enabled: true
-
-Style/UnlessElse:
-  Enabled: true
-
-Style/ClassVars:
-  Enabled: true
-
-Style/StringLiterals:
-  Enabled: true
-  EnforcedStyle: double_quotes
-
-Metrics/CyclomaticComplexity:
-  Max: 10
-
-Metrics/LineLength:
-  Max: 128
-
-Metrics/MethodLength:
-  Max: 32
-
-Metrics/PerceivedComplexity:
-  Max: 8
-
-# Disabled
-
-Style/EvenOdd:
+Lint/MissingCopEnableDirective:
   Enabled: false
-
-Style/AsciiComments:
-  Enabled: false
-
-Style/NumericLiterals:
-  Enabled: false
-
-Style/UnneededPercentQ:
-  Enabled: false
-
-Style/SpecialGlobalVars:
-  Enabled: false
-
-Style/TrivialAccessors:
-  Enabled: false
-
-Style/PerlBackrefs:
-  Enabled: false
-
 Metrics/AbcSize:
-  Enabled: false
-
+  Max: 60
+Metrics/BlockLength:
+  Max: 40
 Metrics/BlockNesting:
-  Enabled: false
-
+  Max: 4
 Metrics/ClassLength:
-  Enabled: false
-
+  Max: 1500
+Metrics/CyclomaticComplexity:
+  Max: 15
 Metrics/MethodLength:
-  Enabled: false
-
+  Max: 50
+Metrics/ModuleLength:
+  Max: 500
 Metrics/ParameterLists:
-  Enabled: false
-
+  Max: 5
 Metrics/PerceivedComplexity:
+  Max: 15
+Security/Open:
   Enabled: false
-
-Style/Documentation:
+Style/ClassAndModuleChildren:
+  Enabled: true
+  EnforcedStyle: nested
+Style/MapToHash:
   Enabled: false
+Style/MutableConstant:
+  Enabled: false
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma

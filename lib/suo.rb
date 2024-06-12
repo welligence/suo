@@ -1,16 +1,17 @@
-require "securerandom"
-require "monitor"
+# frozen_string_literal: true
 
-require "dalli"
-require "dalli/cas/client"
+require 'securerandom'
+require 'monitor'
 
-require "redis"
+require 'dalli'
 
-require "msgpack"
+require 'redis'
 
-require "suo/version"
+require 'msgpack'
 
-require "suo/errors"
-require "suo/client/base"
-require "suo/client/memcached"
-require "suo/client/redis"
+require 'suo/version'
+
+require 'suo/errors'
+require 'suo/client/base'
+require 'suo/client/memcached'
+require 'suo/client/redis'
